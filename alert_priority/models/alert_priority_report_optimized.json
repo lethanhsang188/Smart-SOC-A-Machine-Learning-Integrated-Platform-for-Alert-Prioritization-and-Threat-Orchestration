@@ -1,0 +1,137 @@
+{
+  "version": "alert-priority-auto-cpu-v2",
+  "selected_model": "hist_gradient_boosting",
+  "input_path": "E:\\ML Service\\alert_priority\\data\\wazuh_training_2026-05-04_fixed.jsonl",
+  "samples": 2979,
+  "train_samples": 2234,
+  "test_samples": 745,
+  "label_counts": {
+    "P1": 687,
+    "P2": 1406,
+    "P3": 835,
+    "P4": 51
+  },
+  "labels": [
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "candidate_cv_results": [
+    {
+      "name": "hist_gradient_boosting",
+      "cv_folds": 5,
+      "macro_f1_mean": 0.9888736322761809,
+      "macro_f1_std": 0.014526263799930847,
+      "scores": [
+        1.0,
+        1.0,
+        0.9842901015828018,
+        0.9977923455123879,
+        0.9622857142857143
+      ]
+    },
+    {
+      "name": "random_forest_balanced",
+      "cv_folds": 5,
+      "macro_f1_mean": 0.9825994017226811,
+      "macro_f1_std": 0.013140269273718228,
+      "scores": [
+        0.9933409918417415,
+        1.0,
+        0.9623015873015873,
+        0.977581214637101,
+        0.9797732148329759
+      ]
+    },
+    {
+      "name": "extra_trees_balanced",
+      "cv_folds": 5,
+      "macro_f1_mean": 0.9794574220392416,
+      "macro_f1_std": 0.010139534968446629,
+      "scores": [
+        0.9933409918417415,
+        0.9842901015828018,
+        0.9623015873015873,
+        0.977581214637101,
+        0.9797732148329759
+      ]
+    }
+  ],
+  "classification_report": {
+    "P1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 172.0
+    },
+    "P2": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 351.0
+    },
+    "P3": {
+      "precision": 0.9951923076923077,
+      "recall": 0.9904306220095693,
+      "f1-score": 0.9928057553956835,
+      "support": 209.0
+    },
+    "P4": {
+      "precision": 0.8571428571428571,
+      "recall": 0.9230769230769231,
+      "f1-score": 0.8888888888888888,
+      "support": 13.0
+    },
+    "accuracy": 0.9959731543624161,
+    "macro avg": {
+      "precision": 0.9630837912087912,
+      "recall": 0.9783768862716231,
+      "f1-score": 0.9704236610711431,
+      "support": 745.0
+    },
+    "weighted avg": {
+      "precision": 0.9961584556383215,
+      "recall": 0.9959731543624161,
+      "f1-score": 0.9960428972258435,
+      "support": 745.0
+    }
+  },
+  "confusion_matrix_labels": [
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "confusion_matrix": [
+    [
+      172,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      351,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      207,
+      2
+    ],
+    [
+      0,
+      0,
+      1,
+      12
+    ]
+  ],
+  "top_feature_importance": [],
+  "training_notes": [
+    "Uses CPU only. n_jobs=-1 means all available CPU cores are used where supported.",
+    "High scores can be inflated when labels are derived from rule_id/rule_level that are also present in features."
+  ]
+}

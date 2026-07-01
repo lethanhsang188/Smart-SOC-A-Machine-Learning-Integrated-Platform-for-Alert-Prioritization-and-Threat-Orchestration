@@ -1,0 +1,298 @@
+{
+  "version": "alert-priority-auto-cpu-v2",
+  "selected_model": "random_forest_balanced",
+  "input_path": "data/wazuh_alerts_5-5-2026.json",
+  "samples": 10000,
+  "train_samples": 7500,
+  "test_samples": 2500,
+  "label_counts": {
+    "P1": 4427,
+    "P2": 3843,
+    "P3": 638,
+    "P4": 1092
+  },
+  "labels": [
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "candidate_cv_results": [
+    {
+      "name": "random_forest_balanced",
+      "cv_folds": 5,
+      "macro_f1_mean": 0.9984747435105517,
+      "macro_f1_std": 0.0014398478568149666,
+      "scores": [
+        0.9990470791304569,
+        1.0,
+        0.9985162683367759,
+        0.9990517267048877,
+        0.9957586433806379
+      ]
+    },
+    {
+      "name": "extra_trees_balanced",
+      "cv_folds": 5,
+      "macro_f1_mean": 0.9983557126282513,
+      "macro_f1_std": 0.00237631409260418,
+      "scores": [
+        0.9990470791304569,
+        1.0,
+        1.0,
+        0.9990517267048877,
+        0.993679757305912
+      ]
+    },
+    {
+      "name": "hist_gradient_boosting",
+      "cv_folds": 5,
+      "macro_f1_mean": 0.9968652075840178,
+      "macro_f1_std": 0.0026292926671500545,
+      "scores": [
+        1.0,
+        0.995862091002045,
+        0.9943697520385084,
+        1.0,
+        0.9940941948795352
+      ]
+    }
+  ],
+  "classification_report": {
+    "P1": {
+      "precision": 1.0,
+      "recall": 0.999096657633243,
+      "f1-score": 0.9995481247175779,
+      "support": 1107.0
+    },
+    "P2": {
+      "precision": 1.0,
+      "recall": 0.9989594172736732,
+      "f1-score": 0.9994794377928162,
+      "support": 961.0
+    },
+    "P3": {
+      "precision": 0.9875,
+      "recall": 0.9937106918238994,
+      "f1-score": 0.9905956112852664,
+      "support": 159.0
+    },
+    "P4": {
+      "precision": 0.9963503649635036,
+      "recall": 1.0,
+      "f1-score": 0.9981718464351006,
+      "support": 273.0
+    },
+    "accuracy": 0.9988,
+    "macro avg": {
+      "precision": 0.9959625912408758,
+      "recall": 0.997941691682704,
+      "f1-score": 0.9969487550576903,
+      "support": 2500.0
+    },
+    "weighted avg": {
+      "precision": 0.9988064598540146,
+      "recall": 0.9988,
+      "f1-score": 0.9988020520209581,
+      "support": 2500.0
+    }
+  },
+  "confusion_matrix_labels": [
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "confusion_matrix": [
+    [
+      1106,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      960,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      158,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      273
+    ]
+  ],
+  "top_feature_importance": [
+    {
+      "feature": "rule_level",
+      "importance": 0.13325428154744126
+    },
+    {
+      "feature": "attack_type=xss",
+      "importance": 0.09688525061926141
+    },
+    {
+      "feature": "attack_type=sql_injection",
+      "importance": 0.0833091477965248
+    },
+    {
+      "feature": "attack_priority",
+      "importance": 0.0779400515393871
+    },
+    {
+      "feature": "url_len",
+      "importance": 0.05148246119326201
+    },
+    {
+      "feature": "attack_pattern_hits",
+      "importance": 0.0443983327052394
+    },
+    {
+      "feature": "rule_id=19007",
+      "importance": 0.0432855849228097
+    },
+    {
+      "feature": "src_internal",
+      "importance": 0.03373882215514861
+    },
+    {
+      "feature": "has_srcip",
+      "importance": 0.031080205019175248
+    },
+    {
+      "feature": "attack_type=normal",
+      "importance": 0.03034278466993422
+    },
+    {
+      "feature": "http_status",
+      "importance": 0.02160972156324881
+    },
+    {
+      "feature": "http_method=UNKNOWN",
+      "importance": 0.020111028936210938
+    },
+    {
+      "feature": "rule_id=19008",
+      "importance": 0.016954623337114658
+    },
+    {
+      "feature": "group=sqlinjection",
+      "importance": 0.01577502792318499
+    },
+    {
+      "feature": "group=accesslog",
+      "importance": 0.014922710616163633
+    },
+    {
+      "feature": "rule_id=31164",
+      "importance": 0.014383129497823322
+    },
+    {
+      "feature": "has_http",
+      "importance": 0.01438111542730432
+    },
+    {
+      "feature": "rule_firedtimes",
+      "importance": 0.01392408951463406
+    },
+    {
+      "feature": "group=attack",
+      "importance": 0.013809942593283058
+    },
+    {
+      "feature": "group=vulnerability-detector",
+      "importance": 0.013069267637484023
+    },
+    {
+      "feature": "http_method=GET",
+      "importance": 0.013047967592463698
+    },
+    {
+      "feature": "group=sca",
+      "importance": 0.01179392432841225
+    },
+    {
+      "feature": "rule_id=23502",
+      "importance": 0.011764901128924005
+    },
+    {
+      "feature": "http_status_family=unknown",
+      "importance": 0.011021610177315351
+    },
+    {
+      "feature": "http_status_family=2xx",
+      "importance": 0.010930302265403397
+    },
+    {
+      "feature": "rule_id=31106",
+      "importance": 0.010243542627316686
+    },
+    {
+      "feature": "group=web",
+      "importance": 0.00969180314575906
+    },
+    {
+      "feature": "group=ids",
+      "importance": 0.00821703710645104
+    },
+    {
+      "feature": "group=dpkg",
+      "importance": 0.00659608952363925
+    },
+    {
+      "feature": "group=config_changed",
+      "importance": 0.006227999170857621
+    },
+    {
+      "feature": "has_dest_ip",
+      "importance": 0.006205150444281425
+    },
+    {
+      "feature": "group=authentication_success",
+      "importance": 0.005666560125545129
+    },
+    {
+      "feature": "group=ossec",
+      "importance": 0.004185935571698301
+    },
+    {
+      "feature": "group=pam",
+      "importance": 0.00417759943741372
+    },
+    {
+      "feature": "agent_name=pfsense.home.arpa",
+      "importance": 0.004148744205902708
+    },
+    {
+      "feature": "agent_name=web",
+      "importance": 0.004081709305910985
+    },
+    {
+      "feature": "agent_id=005",
+      "importance": 0.0040386154575527584
+    },
+    {
+      "feature": "rule_id=20101",
+      "importance": 0.0034295408755164775
+    },
+    {
+      "feature": "rule_id=510",
+      "importance": 0.0034130412720885218
+    },
+    {
+      "feature": "attack_type=malware_tool",
+      "importance": 0.003330414041916966
+    }
+  ],
+  "training_notes": [
+    "Uses CPU only. n_jobs=-1 means all available CPU cores are used where supported.",
+    "High scores can be inflated when labels are derived from rule_id/rule_level that are also present in features."
+  ]
+}

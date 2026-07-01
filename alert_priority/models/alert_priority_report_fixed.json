@@ -1,0 +1,90 @@
+{
+  "version": "alert-priority-rf-v1",
+  "input_path": "E:\\ML Service\\alert_priority\\data\\wazuh_training_2026-05-04_fixed.jsonl",
+  "samples": 2979,
+  "train_samples": 2234,
+  "test_samples": 745,
+  "label_counts": {
+    "P1": 687,
+    "P2": 1406,
+    "P3": 835,
+    "P4": 51
+  },
+  "labels": [
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "classification_report": {
+    "P1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 172.0
+    },
+    "P2": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 351.0
+    },
+    "P3": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 209.0
+    },
+    "P4": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 13.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 745.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 745.0
+    }
+  },
+  "confusion_matrix_labels": [
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "confusion_matrix": [
+    [
+      172,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      351,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      209,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      13
+    ]
+  ]
+}
