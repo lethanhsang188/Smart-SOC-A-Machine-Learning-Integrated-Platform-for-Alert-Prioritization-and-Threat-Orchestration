@@ -128,8 +128,4 @@ This project demonstrates how machine learning can support SOC workflows by comb
 - Static malware analysis using PE features and LightGBM.
 - SOAR-style response hooks for enrichment, notification, and containment.
 
-## Authors
 
-- Mentor: Anand Nayyar
-- Team Leader: Le Thanh Sang
-- Contributors: Nguyen Tan Canh, Tran Van Thao
