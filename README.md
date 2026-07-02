@@ -13,6 +13,53 @@ Smart SOC is a security operations prototype that combines SIEM alert analytics,
 
 ## Architecture
 
+The project is demonstrated in a segmented SOC lab that separates the attacker network, DMZ services, server VLAN, and security/SOC VLAN. The three diagrams below document the lab topology and the two primary detection and response flows.
+
+### Smart SOC Lab Network Topology
+
+![Smart SOC lab network topology](docs/images/smart-soc-lab-network-topology.png)
+
+This topology shows the main lab zones and IP addressing:
+
+- Attacker host: `172.16.69.184`
+- Internet gateway segment: `172.16.69.176`
+- pfSense firewall: `192.168.10.1`
+- DMZ web server: `192.168.20.125`
+- Server VLAN 10 with Windows endpoint: `192.168.30.16`
+- Security/SOC VLAN 20 with Wazuh `192.168.10.128`, ML service `192.168.10.49`, and Shuffle `192.168.10.150`
+
+### Web Attack Alert Prioritization And Response Flow
+
+![Web attack alert prioritization and response flow](docs/images/web-attack-alert-prioritization-response-flow.png)
+
+This flow explains how web attacks are detected and prioritized:
+
+1. The attacker targets the web server.
+2. Traffic is forwarded through pfSense to the DMZ web server.
+3. Suricata observes the traffic and generates security events.
+4. Wazuh Agent collects logs such as `eve.json`.
+5. Wazuh Server receives and correlates the collected logs.
+6. Wazuh alerts are sent to the ML service.
+7. The ML service predicts alert priority and forwards high-risk results to Shuffle.
+8. Shuffle sends notification messages to the SOC team.
+9. For high-priority cases, Shuffle can trigger pfSense blocking actions.
+
+### Malware Analysis And Active Response Flow
+
+![Malware analysis and active response flow](docs/images/malware-analysis-active-response-flow.png)
+
+This flow explains the malware analysis workflow:
+
+1. A Windows endpoint downloads a malicious file from the Internet.
+2. Wazuh File Integrity Monitoring detects the file event.
+3. PE features are extracted and sent to the machine learning analysis service.
+4. The ML service returns a malware prediction result.
+5. Shuffle coordinates active response with Wazuh Manager.
+6. Wazuh deletes the malicious file from the endpoint.
+7. Shuffle notifies the SOC team about the detection and response action.
+
+## System Flow
+
 ```text
 Wazuh / SIEM Alerts
         |
@@ -30,16 +77,18 @@ PE File / Endpoint Sample -> PE Feature Extractor ----------+--> Combined ML API
 
 ```text
 .
-├── combined_ml_server.py          # Unified FastAPI service for malware + alert priority inference
-├── ml_server.py                   # Standalone malware detection API
-├── pe_extractor_service.py        # Flask service for PE static feature extraction
-├── model.py                       # EMBER-style feature vectorization and LightGBM training utilities
-├── alert_priority/
-│   ├── alert_priority_server.py   # Standalone Wazuh alert priority API
-│   ├── convert_wazuh_csv.py       # Wazuh CSV to JSON-lines conversion utility
-│   └── feature_extractor.py       # Stable feature extraction for Wazuh/SIEM alerts
-├── requirements.txt
-└── .env.example
+|-- combined_ml_server.py          # Unified FastAPI service for malware + alert priority inference
+|-- ml_server.py                   # Standalone malware detection API
+|-- pe_extractor_service.py        # Flask service for PE static feature extraction
+|-- model.py                       # EMBER-style feature vectorization and LightGBM training utilities
+|-- alert_priority/
+|   |-- alert_priority_server.py   # Standalone Wazuh alert priority API
+|   |-- convert_wazuh_csv.py       # Wazuh CSV to JSON-lines conversion utility
+|   `-- feature_extractor.py       # Stable feature extraction for Wazuh/SIEM alerts
+|-- docs/
+|   `-- images/                    # Lab topology and workflow diagrams
+|-- requirements.txt
+`-- .env.example
 ```
 
 Large binary artifacts such as trained `.model`, `.joblib`, `.pkl`, logs, virtual environments, and presentation files are intentionally excluded from this repository. Place model files locally and point the services to them with environment variables.
